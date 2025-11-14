@@ -1,10 +1,852 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Eclipse Global Logistics</title>
-  </head>
-  <body>
-<h1>Eclipse Global Logistics — Online</h1>
-<p>Version 0.0.1</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eclipse Global Logistics</title>
+  <meta name="description" content="Eclipse Global Logistics – reliable capacity, clear communication, and disciplined execution for shippers and carriers across the U.S." />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0c1020;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: rgba(148, 163, 184, 0.4);
+      --danger: #f97373;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                   "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      position: sticky;
+      top: 0;
+      padding: 0.75rem 0 1rem;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom,
+        rgba(15,23,42,0.98),
+        rgba(15,23,42,0.85),
+        transparent
+      );
+      z-index: 20;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: radial-gradient(circle at 30% 0%, #38bdf8, #0f172a 60%, #020617);
+      box-shadow: 0 0 32px rgba(56,189,248,0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-text h1 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 0.1rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      position: relative;
+      padding-bottom: 0.15rem;
+    }
+
+    nav a:hover {
+      color: var(--text-main);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.2rem;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.16s ease-out;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 2.5rem;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding: 1.75rem 1.5rem;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: radial-gradient(circle at top left,
+          rgba(56, 189, 248, 0.22),
+          rgba(15, 23, 42, 0.96) 45%,
+          #020617 100%);
+      box-shadow:
+        0 20px 45px rgba(15, 23, 42, 0.9),
+        0 0 80px rgba(56, 189, 248, 0.3);
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: rgba(15,23,42,0.7);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--text-muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-kicker span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34,197,94,0.8);
+    }
+
+    .hero h2 {
+      font-size: clamp(1.9rem, 2.5vw + 1.4rem, 2.5rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h2 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 32rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pill {
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-muted);
+      background: rgba(15,23,42,0.8);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.16s ease-out;
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text-main);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+      color: #0b1220;
+      border-color: rgba(56,189,248,0.85);
+      box-shadow:
+        0 10px 25px rgba(8, 47, 73, 0.9),
+        0 0 30px rgba(56,189,248,0.6);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+      box-shadow:
+        0 14px 28px rgba(8, 47, 73, 0.95),
+        0 0 40px rgba(56,189,248,0.9);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .hero-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .hero-note strong {
+      color: var(--accent);
+    }
+
+    .hero-panel {
+      border-radius: 1.3rem;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: radial-gradient(circle at top,
+          rgba(56, 189, 248, 0.18),
+          rgba(15, 23, 42, 0.98) 50%,
+          #020617 100%);
+      padding: 1.1rem 1rem 1.4rem;
+      font-size: 0.83rem;
+    }
+
+    .hero-panel-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-metric-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .metric {
+      flex: 1;
+      padding: 0.7rem 0.75rem;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.9);
+    }
+
+    .metric-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .metric-value {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .metric-tag {
+      font-size: 0.7rem;
+      color: var(--accent);
+      margin-top: 0.1rem;
+    }
+
+    .hero-panel-footer {
+      margin-top: 0.9rem;
+      padding-top: 0.7rem;
+      border-top: 1px dashed rgba(148,163,184,0.5);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .hero-panel-footer span {
+      color: var(--accent);
+    }
+
+    .section {
+      margin-bottom: 2.5rem;
+      padding: 1.5rem 1.25rem;
+      border-radius: 1.3rem;
+      border: 1px solid rgba(148,163,184,0.45);
+      background: rgba(15,23,42,0.9);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 1.4rem;
+      align-items: flex-end;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .section-header h3 {
+      margin-top: 0.2rem;
+      font-size: 1.1rem;
+    }
+
+    .section-header p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      max-width: 24rem;
+    }
+
+    .pill-row-tight {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: flex-end;
+    }
+
+    .pill-ghost {
+      font-size: 0.7rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      border-radius: 1rem;
+      border: 1px solid rgba(148,163,184,0.5);
+      padding: 0.9rem 0.85rem;
+      background: radial-gradient(circle at top,
+          rgba(15,23,42,0.9),
+          rgba(15,23,42,0.98));
+    }
+
+    .card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-meta {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .card-tag {
+      display: inline-flex;
+      margin-top: 0.35rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 1.4rem;
+    }
+
+    .list {
+      list-style: none;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .list li {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .list-bullet {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      margin-top: 0.4rem;
+      background: var(--accent);
+    }
+
+    .contact-block {
+      border-radius: 1rem;
+      border: 1px dashed rgba(148,163,184,0.7);
+      padding: 0.9rem 0.85rem;
+      background: radial-gradient(circle at top left,
+          rgba(56,189,248,0.18),
+          rgba(15,23,42,0.98));
+      font-size: 0.84rem;
+    }
+
+    .contact-block strong {
+      color: var(--accent);
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .contact-item {
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      font-size: 0.76rem;
+    }
+
+    footer {
+      padding: 1.5rem 1.25rem 0.75rem;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(15,23,42,0.9);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    @media (max-width: 880px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.85rem;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0,1fr);
+      }
+
+      .two-column {
+        grid-template-columns: minmax(0,1fr);
+      }
+
+      .section {
+        padding-inline: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="brand">
+        <div class="brand-mark">EG</div>
+        <div class="brand-text">
+          <h1>Eclipse Global Logistics</h1>
+          <span>Capacity • Clarity • Control</span>
+        </div>
+      </div>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#shippers">For Shippers</a>
+        <a href="#carriers">For Carriers</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="hero-kicker">
+            <span></span>
+            <div>Live capacity — human clarity</div>
+          </div>
+          <h2>
+            Reliable trucks. <span>Precise communication.</span><br />
+            Execution you can trust.
+          </h2>
+          <p>
+            Eclipse Global Logistics is building a disciplined capacity network
+            for shippers and carriers who value clear expectations, proactive updates,
+            and lanes that make sense for everyone involved.
+          </p>
+
+          <div class="hero-pill-row">
+            <div class="pill">Dry van &amp; general freight</div>
+            <div class="pill">Midwest &amp; national expansion</div>
+            <div class="pill">Human-first dispatch</div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Request capacity</a>
+            <a href="#carriers" class="btn btn-secondary">Join our carrier network</a>
+          </div>
+
+          <p class="hero-note">
+            <strong>Early-stage launch:</strong> We’re onboarding a focused group of
+            shipper partners and carriers to build a tight, high-communication network.
+          </p>
+        </div>
+
+        <aside class="hero-panel">
+          <div class="hero-panel-title">Command snapshot</div>
+
+          <div class="hero-metric-row">
+            <div class="metric">
+              <div class="metric-label">Primary focus</div>
+              <div class="metric-value">Consistent lanes</div>
+              <div class="metric-tag">no chaos freight</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Communication</div>
+              <div class="metric-value">Proactive</div>
+              <div class="metric-tag">no silent trucks</div>
+            </div>
+          </div>
+
+          <div class="hero-metric-row">
+            <div class="metric">
+              <div class="metric-label">Shipper promise</div>
+              <div class="metric-value">No surprises</div>
+              <div class="metric-tag">clear expectations</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Carrier promise</div>
+              <div class="metric-value">Respect</div>
+              <div class="metric-tag">real partnership</div>
+            </div>
+          </div>
+
+          <div class="hero-panel-footer">
+            Built intentionally from day one — with a focus on
+            <span>alignment, reliability, and long-term relationships</span>.
+          </div>
+        </aside>
+      </section>
+
+      <section id="services" class="section">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Services</div>
+            <h3>What Eclipse Global handles for you</h3>
+          </div>
+          <div>
+            <p>
+              We’re building a focused service stack — not “anything for anyone.”
+              That means we say yes to the right freight and no to what doesn’t fit
+              our network.
+            </p>
+          </div>
+        </div>
+
+        <div class="services-grid">
+          <article class="card">
+            <h4>Dry Van Full Truckload</h4>
+            <p>
+              Core over-the-road capacity with disciplined communication and
+              tight appointment management.
+            </p>
+            <div class="card-meta">
+              Primary lanes: initial Midwest focus expanding outward.
+              <div class="card-tag">Shipper facing</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h4>Regional &amp; Dedicated Lanes</h4>
+            <p>
+              Consistency for both sides: recurring freight, familiar facilities,
+              and fewer unknowns for drivers.
+            </p>
+            <div class="card-meta">
+              Ideal for shippers wanting predictable coverage.
+              <div class="card-tag">Network building</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h4>High-Communication Dispatch</h4>
+            <p>
+              Real updates, not ghosting. You’ll know where your freight is and
+              what’s happening — before you have to ask.
+            </p>
+            <div class="card-meta">
+              Status cadence aligned with each customer.
+              <div class="card-tag">Operations</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h4>Carrier Relationship Management</h4>
+            <p>
+              We treat carriers like partners — with honest information, clear
+              expectations, and feedback loops that go both ways.
+            </p>
+            <div class="card-meta">
+              Ideal for small fleets &amp; owner-operators.
+              <div class="card-tag">Carrier network</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="shippers" class="section">
+        <div class="section-header">
+          <div>
+            <div class="section-title">For shippers</div>
+            <h3>Capacity you can rely on — built on real communication</h3>
+          </div>
+          <div class="pill-row-tight">
+            <div class="pill-ghost">Appointment integrity</div>
+            <div class="pill-ghost">Real-time updates</div>
+            <div class="pill-ghost">Lane discipline</div>
+          </div>
+        </div>
+
+        <div class="two-column">
+          <div>
+            <ul class="list">
+              <li>
+                <span class="list-bullet"></span>
+                <span>Clear expectations upfront: lanes, rates, accessorials, and check-in requirements.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>Proactive communication when anything shifts — not after a problem has already landed on your desk.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>Focus on building long-term, repeatable lanes instead of one-off chaos freight.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>Documentation handled: BOLs, PODs, and status notes organized and easy to access.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact-block">
+            <strong>Ready to explore fit?</strong><br />
+            Share your lanes, volume, and expectations — and we’ll respond with
+            a clear yes/no and what we can realistically commit to.
+            <div class="contact-row" style="margin-top:0.7rem;">
+              <a href="mailto:hello@eclipsegloballogistics.com?subject=Shipper%20inquiry"
+                 class="contact-item">
+                Email: hello@eclipsegloballogistics.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="carriers" class="section">
+        <div class="section-header">
+          <div>
+            <div class="section-title">For carriers</div>
+            <h3>Respect in the details: information, timing, and pay</h3>
+          </div>
+          <div class="pill-row-tight">
+            <div class="pill-ghost">Straight answers</div>
+            <div class="pill-ghost">Facility notes</div>
+            <div class="pill-ghost">Repeatable lanes</div>
+          </div>
+        </div>
+
+        <div class="two-column">
+          <div>
+            <ul class="list">
+              <li>
+                <span class="list-bullet"></span>
+                <span>Honest lane details: real weights, facility tendencies, and expectations.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>Clear appointment times and realistic transit expectations.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>We’re building consistent freight that respects your time — not just chasing the board.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact-block">
+            <strong>Interested in running with Eclipse?</strong><br />
+            We are onboarding a small group of owner-operators and small fleets
+            who value communication and consistency.
+            <div class="contact-row">
+              <a href="mailto:carriers@eclipsegloballogistics.com?subject=Carrier%20network"
+                 class="contact-item">
+                Email: carriers@eclipsegloballogistics.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="section-header">
+          <div>
+            <div class="section-title">About Eclipse</div>
+            <h3>Built intentionally, not accidentally</h3>
+          </div>
+          <p>
+            Eclipse Global Logistics is being built as a disciplined, modern
+            logistics company — with a foundation in structure, clarity, and
+            respect for everyone in the chain: shippers, carriers, and drivers.
+          </p>
+        </div>
+
+        <div class="two-column">
+          <div>
+            <ul class="list">
+              <li>
+                <span class="list-bullet"></span>
+                <span>We focus on alignment: right shipper, right freight, right carrier.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>We’re not trying to be the loudest — we’re building to be the most reliable.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>Every lane and relationship is evaluated on communication, consistency, and mutual respect.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact-block">
+            This site is an early snapshot of Eclipse. Infrastructure, technology,
+            and network depth will continue to grow — but our core stays the same:
+            <strong>clarity, reliability, and long-term thinking.</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Contact</div>
+            <h3>Start the first conversation</h3>
+          </div>
+          <p>
+            Share how you’d like to work with us — shipper, carrier, or partner.
+            We’ll respond with clear next steps, not a canned sequence.
+          </p>
+        </div>
+
+        <div class="two-column">
+          <div>
+            <div class="contact-block">
+              <strong>Primary email</strong><br />
+              <div class="contact-row">
+                <div class="contact-item">
+                  hello@eclipsegloballogistics.com
+                </div>
+              </div>
+              <p style="margin-top:0.5rem;">
+                Include your role (shipper / carrier), lanes of interest, and any
+                non-negotiables. We respect your time and will be direct in our reply.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <ul class="list">
+              <li>
+                <span class="list-bullet"></span>
+                <span>Shippers — include origin/destination pairs, frequency, and equipment type.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>Carriers — include home base, preferred regions, and equipment count.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="year"></span> Eclipse Global Logistics. All rights reserved.</div>
+      <div style="margin-top:0.25rem;">
+        Eclipse is being built as a disciplined, modern logistics network. This
+        page will evolve as our infrastructure expands.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>

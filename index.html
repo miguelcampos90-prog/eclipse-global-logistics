@@ -796,43 +796,104 @@
         <div class="section-header">
           <div>
             <div class="section-title">Contact</div>
-            <h3>Start the first conversation</h3>
+            <h3>Put freight or wheels in motion</h3>
           </div>
           <p>
-            Share how you’d like to work with us — shipper, carrier, or partner.
-            We’ll respond with clear next steps, not a canned sequence.
+            Two clean paths: shippers who need reliable capacity and carriers who want
+            consistent lanes with real communication. Pick your side and send us the
+            basics — we’ll respond with clear next steps.
           </p>
         </div>
 
         <div class="two-column">
-          <div>
-            <div class="contact-block">
-              <strong>Primary email</strong><br />
-              <div class="contact-row">
-                <div class="contact-item">
-                  hello@eclipsegloballogistics.com
-                </div>
+          <!-- SHIPPER FORM -->
+          <div class="contact-block">
+            <strong>For shippers</strong><br />
+            <p style="margin-top:0.35rem; margin-bottom:0.5rem;">
+              Tell us what you move, where it moves, and how often. We’ll reply with a
+              direct yes/no on fit and what we can realistically support.
+            </p>
+
+            <form
+              onsubmit="window.location.href =
+                'mailto:hello@eclipsegloballogistics.com'
+                + '?subject=' + encodeURIComponent('Shipper lane request')
+                + '&body=' + encodeURIComponent(
+                  'Name: ' + this.name.value + '\\n'
+                  + 'Company: ' + this.company.value + '\\n'
+                  + 'Email: ' + this.email.value + '\\n'
+                  + 'Phone: ' + this.phone.value + '\\n'
+                  + 'Primary origins: ' + this.origins.value + '\\n'
+                  + 'Primary destinations: ' + this.destinations.value + '\\n'
+                  + 'Frequency / volume: ' + this.volume.value + '\\n'
+                  + 'Notes: ' + this.notes.value
+                );
+                return false;"
+              style="margin-top:0.4rem; display:grid; gap:0.4rem; font-size:0.8rem;"
+            >
+              <input name="name" required placeholder="Your name" />
+              <input name="company" required placeholder="Company" />
+              <input name="email" type="email" required placeholder="Email" />
+              <input name="phone" placeholder="Phone (optional)" />
+              <input name="origins" required placeholder="Primary origins (city/state)" />
+              <input name="destinations" required placeholder="Primary destinations (city/state)" />
+              <input name="volume" placeholder="Volume & frequency (e.g. 3–5 loads/week)" />
+              <textarea name="notes" rows="3" placeholder="Any special requirements, accessorials, or non-negotiables"></textarea>
+
+              <button type="submit" class="btn btn-primary" style="margin-top:0.3rem; justify-content:center;">
+                Send shipper details
+              </button>
+              <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">
+                This opens an email in your mail app with your details pre-filled. Review, add anything else, and hit send.
               </div>
-              <p style="margin-top:0.5rem;">
-                Include your role (shipper / carrier), lanes of interest, and any
-                non-negotiables. We respect your time and will be direct in our reply.
-              </p>
-            </div>
+            </form>
           </div>
 
-          <div>
-            <ul class="list">
-              <li>
-                <span class="list-bullet"></span>
-                <span>Shippers — include origin/destination pairs, frequency, and equipment type.</span>
-              </li>
-              <li>
-                <span class="list-bullet"></span>
-                <span>Carriers — include home base, preferred regions, and equipment count.</span>
-              </li>
-            </ul>
+          <!-- CARRIER FORM -->
+          <div class="contact-block">
+            <strong>For carriers &amp; owner-operators</strong><br />
+            <p style="margin-top:0.35rem; margin-bottom:0.5rem;">
+              Share where you’re based, what you pull, and what kind of lanes you want.
+              We’ll respond honestly about what we can plug you into.
+            </p>
+
+            <form
+              onsubmit="window.location.href =
+                'mailto:carriers@eclipsegloballogistics.com'
+                + '?subject=' + encodeURIComponent('Carrier network inquiry')
+                + '&body=' + encodeURIComponent(
+                  'Name: ' + this.name.value + '\\n'
+                  + 'Company / MC#: ' + this.company.value + '\\n'
+                  + 'Email: ' + this.email.value + '\\n'
+                  + 'Phone: ' + this.phone.value + '\\n'
+                  + 'Home base: ' + this.homebase.value + '\\n'
+                  + 'Equipment: ' + this.equipment.value + '\\n'
+                  + 'Preferred regions: ' + this.regions.value + '\\n'
+                  + 'Notes: ' + this.notes.value
+                );
+                return false;"
+              style="margin-top:0.4rem; display:grid; gap:0.4rem; font-size:0.8rem;"
+            >
+              <input name="name" required placeholder="Your name" />
+              <input name="company" required placeholder="Company / MC# / DOT#" />
+              <input name="email" type="email" required placeholder="Email" />
+              <input name="phone" required placeholder="Phone" />
+              <input name="homebase" required placeholder="Home base (city/state)" />
+              <input name="equipment" required placeholder="Equipment (e.g. 53' dry van)" />
+              <input name="regions" placeholder="Preferred regions / lanes" />
+              <textarea name="notes" rows="3" placeholder="Anything we should know (week preferences, detention tolerance, etc.)"></textarea>
+
+              <button type="submit" class="btn btn-secondary" style="margin-top:0.3rem; justify-content:center;">
+                Send carrier details
+              </button>
+              <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">
+                This will open a pre-filled email. Review it, attach any docs you want, and send.
+              </div>
+            </form>
           </div>
         </div>
+      </section>
+
       </section>
     </main>
 
